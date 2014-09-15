@@ -9,7 +9,5 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new MyGdxGame(), config);
 
-        // HeLl0 sIaNtyX
-        //Hell0 l0v3l4z3
 	}
 }

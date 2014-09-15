@@ -5,6 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="20" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
 
     <application
         android:allowBackup="true"
@@ -13,8 +15,8 @@
         android:theme="@style/GdxTheme" >
         <activity
             android:name="com.Maracas.gaem.android.AndroidLauncher"
-            android:label="@string/app_name" 
-            android:screenOrientation="landscape"
+            android:label="@string/app_name"
+            android:screenOrientation="fullSensor"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
