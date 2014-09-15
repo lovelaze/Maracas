@@ -1,5 +1,6 @@
 package com.Maracas.gaem;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.Logger;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,7 @@ public class MyGdxGame extends ApplicationAdapter {
     BitmapFont font;
     float accelX, accelY, accelZ;
     float vibratetimer;
+    boolean shaked;
 
 	@Override
 	public void create () {
@@ -37,8 +40,10 @@ public class MyGdxGame extends ApplicationAdapter {
         generator.dispose();
 
 
+        shaked = false;
 
 
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
     }
 
 	@Override
@@ -55,20 +60,47 @@ public class MyGdxGame extends ApplicationAdapter {
         font.draw(batch, "X = " + accelX, Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/1.5f);
         font.draw(batch, "Y = " + accelY, Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2f);
         font.draw(batch, "Z = " + accelZ, Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/2.5f);
+
+        //Gdx.app.debug("Vibrator", "X = " + accelX);
+        ////Gdx.app.debug("Vibrator", "Y = " + accelY);
+        //Gdx.app.debug("Vibrator", "Z = " + accelZ);
+
 		batch.end();
 	}
 
-    public void update()
-    {
+    public void update() {
         vibratetimer -= Gdx.graphics.getDeltaTime();
         accelX = Gdx.input.getAccelerometerX();
         accelY = Gdx.input.getAccelerometerY();
         accelZ = Gdx.input.getAccelerometerZ();
 
+
+        if (shaked == false && accelY >= 9) {
+            shaked = true;
+            Gdx.input.vibrate(250);
+            Gdx.app.debug("COOLTAG", "MARACAS 1");
+        }
+
+        if (shaked == true && accelY <= -9) {
+            shaked = false;
+            Gdx.input.vibrate(250);
+            Gdx.app.debug("COOLTAG", "MARACAS 2");
+        }
+
+
+
+
+
+
+
+         /*
         if (accelY >= 9 && vibratetimer <= 0) {
             Gdx.input.vibrate(1000);
+            Gdx.app.debug("COOLTAG", "SHAKEY SHAKEY");
             vibratetimer = 1f;
         }
+                   */
+
     }
 
 
